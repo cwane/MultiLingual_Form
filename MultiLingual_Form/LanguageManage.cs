@@ -11,9 +11,9 @@ namespace MultiLingual_Form
     {
         public static List<Languages> AvailableLanguages = new List<Languages>
         {
-            new Languages { LanguageFullName = "English", LanguageCultureName = "en" },
-            new Languages { LanguageFullName = "Nepali", LanguageCultureName = "ne" },
-            new Languages { LanguageFullName = "Japanese", LanguageCultureName = "ja" },
+            new Languages { LanguageFullName = "English", LanguageCultureName = "en", Direction = "ltr" },
+            new Languages { LanguageFullName = "Nepali", LanguageCultureName = "ne", Direction = "ltr"  },
+            new Languages { LanguageFullName = "Japanese", LanguageCultureName = "ja", Direction = "rtl"  },
         };
         public static bool IsLanguageAvailable(string lang)
         {
@@ -43,5 +43,6 @@ namespace MultiLingual_Form
     {
         public string LanguageFullName { get; set; }
         public string LanguageCultureName { get; set; }
+        public string Direction { get; set; }
     }
 }

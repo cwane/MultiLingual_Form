@@ -1,64 +1,140 @@
 ﻿@model MultiLingual_Form.Models.Registration
 
-    @{
-        ViewBag.Title = MultiLingual_Form.Resource.Register;
-    }
+@{
+    ViewBag.Title = MultiLingual_Form.Resource.Register;
+    string direction = ViewBag.LanguageDirection ?? "ltr"; // Default to LTR if not set
+}
 
-    <h2>@MultiLingual_Form.Resource.Register</h2>
+<h2>@MultiLingual_Form.Resource.Register</h2>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <h4>@MultiLingual_Form.Resource.Register</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <h4>@MultiLingual_Form.Resource.Register</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", lang = ViewBag.LanguageCulture } })
-                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", lang = ViewBag.LanguageCulture } })
-                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", lang = ViewBag.LanguageCulture } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control", lang = ViewBag.LanguageCulture } })
-                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="@MultiLingual_Form.Resource.Register" class="btn btn-default" />
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", lang = ViewBag.LanguageCulture, dir = direction } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", lang = ViewBag.LanguageCulture, dir = direction } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", lang = ViewBag.LanguageCulture, dir = direction } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control", lang = ViewBag.LanguageCulture, dir = direction } })
+                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@MultiLingual_Form.Resource.Register" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<!-- Include simple-keyboard CSS and JavaScript -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
+<script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.js"></script>
+
+<div class="simple-keyboard"></div>
+
+<script>
+    // Get the selected language from server-side rendering
+    var selectedLanguage = "@ViewBag.LanguageCulture";
+
+    // Define language layouts for the keyboard
+    const layouts = {
+        //en: [
+        //    "` 1 2 3 4 5 6 7 8 9 0 - =",
+        //    "q w e r t y u i o p [ ] \\",
+        //    "a s d f g h j k l ; '",
+        //    "z x c v b n m , . /",
+        //    "Shift Space Backspace Enter"
+        //],
+        ne: [
+            "` १ २ ३ ४ ५ ६ ७ ८ ९ ० - =",
+            "क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण",
+            "त थ द ध न प फ ब भ म य र ल व स ह",
+            "ष श ळ क्ष त्र ज्ञ , . /",
+            "Shift Space Backspace Enter"
+        ],
+        ja: [
+            "` 1 2 3 4 5 6 7 8 9 0 - =",
+            "あ い う え お か き く け こ さ し す せ そ",
+            "た ち つ て と な に ぬ ね の ま み む め も",
+            "や ゆ よ ら り る れ ろ わ を ん , . /",
+            "Shift Space Backspace Enter"
+        ]
+    };
+    // Initialize the keyboard
+    const keyboard = new SimpleKeyboard.default({
+        onChange: input => updateInput(input),
+        layout: {
+            'default': layouts[selectedLanguage] || layouts.en
+        }
+    });
+
+    // Update input field when keyboard changes
+    function updateInput(input) {
+        const activeElement = document.activeElement;
+        if (activeElement && activeElement.classList.contains("form-control")) {
+            // Set the value to the input field
+            activeElement.value = input;  // Overwrite the value with the current input
+        }
     }
 
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+    // Append character from keyboard to the active input field
+    function appendCharacter(char) {
+        const activeElement = document.activeElement;
+        if (activeElement && activeElement.classList.contains("form-control")) {
+            activeElement.value += char; // Append character
+            keyboard.setInput(activeElement.value); // Update keyboard input
+        }
+    }
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    // Listen for key clicks
+    document.querySelectorAll(".simple-keyboard .hg-button").forEach(key => {
+        key.addEventListener("click", function() {
+            appendCharacter(this.innerHTML.trim());
+        });
+    });
+
+    // Handle typing in form fields
+    document.querySelectorAll(".form-control").forEach(input => {
+        input.addEventListener("focus", (e) => {
+            keyboard.setInput(e.target.value); // Set initial keyboard input
+        });
+    });
+</script>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

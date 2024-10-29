@@ -14,6 +14,10 @@ namespace MultiLingual_Form.Controllers
         public ActionResult Index()
         {
             ViewBag.LanguageCulture = Thread.CurrentThread.CurrentUICulture.Name;
+            var selectedLanguage = LanguageManage.AvailableLanguages
+              .FirstOrDefault(l => l.LanguageCultureName == ViewBag.LanguageCulture);
+            ViewBag.LanguageDirection = selectedLanguage?.Direction ?? "ltr";
+
             return View();
         }
         [HttpPost]
